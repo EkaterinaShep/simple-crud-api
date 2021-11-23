@@ -1,0 +1,27 @@
+{
+  "name": "simple-crud-api",
+  "version": "1.0.0",
+  "description": "Simple CRUD API with in-memory database",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon simple-crud-api"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EkaterinaShep/simple-crud-api.git"
+  },
+  "author": "EkaterinaShep",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EkaterinaShep/simple-crud-api/issues"
+  },
+  "homepage": "https://github.com/EkaterinaShep/simple-crud-api#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "nodemon": "^2.0.15"
+  }
+}
