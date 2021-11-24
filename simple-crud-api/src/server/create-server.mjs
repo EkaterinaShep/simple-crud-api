@@ -1,7 +1,7 @@
 import http from 'http';
 
-function createServer(requestsListener) {
-  return http.createServer(requestsListener.handleRequests);
+function createServer({ requestListener }) {
+  return http.createServer(requestListener);
 }
 
 export { createServer };

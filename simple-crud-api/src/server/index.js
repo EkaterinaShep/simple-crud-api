@@ -1,6 +1,5 @@
 import { createServer } from './create-server.mjs';
-import { getHost } from './get-host.mjs';
-import { getPort } from './get-port.mjs';
+import { setServerOption } from './set-server-option.mjs';
 import { listenServer } from './listen-server.mjs';
 
-export { createServer, getHost, getPort, listenServer };
+export { createServer, setServerOption, listenServer };
