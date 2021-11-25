@@ -1,9 +1,13 @@
 function respondToRequest(
   res,
-  { statusCode, statusMessage, headers, endMessage }
+  { statusCode, statusMessage, headers },
+  endMessage
 ) {
   res.writeHead(statusCode, statusMessage, headers);
-  res.end(JSON.stringify({ message: endMessage }));
+
+  const message =
+    String(statusCode)[0] === '4' ? { message: endMessage } : endMessage;
+  res.end(JSON.stringify(message));
 }
 
 export { respondToRequest };

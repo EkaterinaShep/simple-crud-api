@@ -1,26 +1,24 @@
 import { respondToRequest } from '../../helpers/req-res/respond-to-request.mjs';
 import * as PersonController from '../../controllers/personController.mjs';
-
-const API_PATH = '/person';
-const responses = {
-  404: {
-    statusCode: 404,
-    statusMessage: 'Not Found',
-    headers: { 'Content-Type': 'application/json' },
-  },
-};
+import { responses, API_PATH } from '../../constants/constants.mjs';
 
 function handleRequest(req, res) {
-  const { headers, method, url } = req;
+  const { method, url } = req;
 
-  if (url === API_PATH || url.startsWith(`${API_PATH}/`)) {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('ccc');
+  if (url === API_PATH || PersonController.hasId(url, API_PATH)) {
+    PersonController.handleRequest(req, res, {
+      API_PATH,
+      method,
+      url,
+    });
     return;
   }
 
-  responses['404']['endMessage'] = `The requested URL ${url} was not found`;
-  respondToRequest(res, responses['404']);
+  respondToRequest(
+    res,
+    responses['404'],
+    `The requested URL '${url}' was not found`
+  );
 }
 
 export { handleRequest };
