@@ -1,13 +1,6 @@
 import { Person } from '../models/personModel.mjs';
 
-const db = [
-  new Person({
-    id: 'f8f482e5-ebb3-4682-9f6a-d3288ae19362',
-    name: 'Vasya',
-    age: 22,
-    hobbies: ['parkour', 'bicycling'],
-  }),
-];
+const db = [];
 
 function getAll() {
   return db;
@@ -21,9 +14,7 @@ function addData(data) {
   db.push(data);
 }
 
-function updateData(id, newProperties) {
-  const data = findById(id)[0];
-
+function updateData(data, newProperties) {
   Object.entries(newProperties).forEach((property) => {
     const key = property[0];
     const value = property[1];

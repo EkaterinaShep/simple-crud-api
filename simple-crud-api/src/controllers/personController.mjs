@@ -1,142 +1,83 @@
 import { responses } from '../constants/constants.mjs';
-import { getRequestBody, respondToRequest } from '../helpers/req-res/index.mjs';
-import { isValidId } from '../helpers/validation/is-valid-id.mjs';
-import { isValidJson } from '../helpers/validation/is-valid-json.mjs';
-import * as personService from '../services/personService.mjs';
+import { respondToRequest } from '../helpers/req-res/index.mjs';
+import * as PersonService from '../services/personService.mjs';
+import { getId, hasId } from './helpers/index.mjs';
 
-function handleRequest(req, res, { API_PATH, method, url }) {
+/* ------------------------------ Main function ----------------------------- */
+async function handleRequest({ req, res, API_PATH }) {
+  const { url } = req;
+
   if (hasId(url, API_PATH)) {
-    handleRequestWithId(req, res, method, url);
+    await handleRequestWithId(req, res);
     return;
   }
 
-  handleRequestWithoutId(req, res, method).catch((err) => {
-    console.log(44444);
-  });
+  await handleRequestWithoutId(req, res);
 }
 
-async function handleRequestWithId(req, res, method, url) {
+/* ------------------------------ Subfunctions ------------------------------ */
+async function handleRequestWithId(req, res) {
+  const { url, method } = req;
   const id = getId(url);
   let person;
 
   switch (method) {
     case 'GET':
-      if (!isValidId(id)) {
-        respondToRequest(res, responses['400'], `The ID '${id}' is not valid`);
-        return;
-      }
-
-      person = personService.findPerson(id);
-
-      if (person.length === 0) {
-        respondToRequest(
-          res,
-          responses['404'],
-          `Person with ID '${id}' was not found`
-        );
-        return;
-      }
+      person = PersonService.findPerson(id);
 
       respondToRequest(res, responses['200'], person);
+
       break;
 
     case 'PUT':
-      if (!isValidId(id)) {
-        respondToRequest(res, responses['400'], `The ID '${id}' is not valid`);
-        return;
-      }
-
-      person = personService.findPerson(id);
-
-      if (person.length === 0) {
-        respondToRequest(
-          res,
-          responses['404'],
-          `Person with ID '${id}' was not found`
-        );
-        return;
-      }
-
-      const reqBody = await getRequestBody(req);
-
-      if (!isValidJson(reqBody)) {
-        respondToRequest(res, responses['400'], `Invalid JSON string`);
-        return;
-      }
-
-      person = personService.updatePerson(id, reqBody);
+      person = await PersonService.updatePerson(id, req);
 
       respondToRequest(res, responses['200'], person);
 
       break;
     case 'DELETE':
-      if (!isValidId(id)) {
-        respondToRequest(res, responses['400'], `The ID '${id}' is not valid`);
-        return;
-      }
-
-      person = personService.findPerson(id);
-
-      if (person.length === 0) {
-        respondToRequest(
-          res,
-          responses['404'],
-          `Person with ID '${id}' was not found`
-        );
-        return;
-      }
-
-      person = personService.deletePerson(person[0]);
+      PersonService.deletePerson(id);
 
       respondToRequest(res, responses['204']);
 
       break;
+    default:
+      respondToRequest(
+        res,
+        responses['405'],
+        `The '${method}' method is not supported`
+      );
+      return;
   }
 }
-async function handleRequestWithoutId(req, res, method) {
+
+async function handleRequestWithoutId(req, res) {
+  const { method } = req;
   let persons;
 
   switch (method) {
     case 'GET':
-      persons = personService.getAll();
+      persons = PersonService.getAll();
 
       respondToRequest(res, responses['200'], persons);
 
       break;
 
     case 'POST':
-      const reqBody = await getRequestBody(req);
+      const person = await PersonService.addPerson(req);
 
-      if (!isValidJson(reqBody)) {
-        respondToRequest(res, responses['400'], `Invalid JSON string`);
-        return;
-      }
-
-      if (personService.isValidPerson(reqBody)) {
-        const person = personService.addPerson(reqBody);
-        respondToRequest(res, responses['200'], person);
-        return;
-      }
-
-      respondToRequest(
-        res,
-        responses['400'],
-        `The required properties are not defined`
-      );
+      respondToRequest(res, responses['200'], person);
 
       break;
+
+    default:
+      respondToRequest(
+        res,
+        responses['405'],
+        `The '${method}' method is not supported`
+      );
+      return;
   }
 }
 
-function hasId(url, api_path) {
-  const apiPathLength = api_path.length;
-  const urlLength = url.length;
-
-  return urlLength > apiPathLength;
-}
-
-function getId(url) {
-  return url.split('/', 3)[2];
-}
-
-export { handleRequest, hasId };
+export { handleRequest };

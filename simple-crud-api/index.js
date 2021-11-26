@@ -3,7 +3,7 @@ import {
   setServerOption,
   listenServer,
 } from './src/server/index.js';
-import * as requestListener from './src/handlers/requestListener/request-listener.mjs';
+import * as requestListener from './src/handlers/request-listener.mjs';
 
 const server = createServer({ requestListener: requestListener.handleRequest });
 const PORT = setServerOption({ envVarName: 'PORT', staticValue: 8080 });

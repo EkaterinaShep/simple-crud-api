@@ -1,48 +1,70 @@
 import * as db from '../db/db.mjs';
 import { Person } from '../models/personModel.mjs';
+import { isValidJson } from '../helpers/validation/is-valid-json.mjs';
+import { isValidPerson } from '../helpers/validation/is-valid-person.mjs';
+import { isValidId } from '../helpers/validation/is-valid-id.mjs';
+import {
+  InvalidJSONError,
+  MissingPropertyError,
+  AbsentIDError,
+  InvalidIDError,
+} from '../errors/custom-errors.mjs';
+import { getRequestBody } from '../helpers/req-res/get-request-body.mjs';
+import { getOnlyRequiredProperties } from './helpers/index.mjs';
 
 function getAll() {
   return db.getAll();
 }
 
 function findPerson(id) {
-  return db.findById(id);
+  const results = db.findById(id);
+
+  if (!isValidId(id)) {
+    throw new InvalidIDError(`The ID '${id}' is not valid`);
+  }
+  if (results.length === 0) {
+    throw new AbsentIDError(`Person with ID '${id}' was not found`);
+  }
+
+  return results[0];
 }
 
-function addPerson(reqBody) {
-  const person = new Person(JSON.parse(reqBody));
+async function addPerson(req) {
+  const reqBody = await getRequestBody(req);
 
+  if (!isValidJson(reqBody)) {
+  }
+
+  if (!isValidPerson(reqBody)) {
+    throw new MissingPropertyError('The required properties are not defined');
+  }
+
+  const person = new Person(JSON.parse(reqBody));
   db.addData(person);
+  return person;
+}
+
+async function updatePerson(id, req) {
+  const person = findPerson(id);
+
+  const reqBody = await getRequestBody(req);
+
+  if (!isValidJson(reqBody)) {
+    throw new InvalidJSONError('Invalid JSON string');
+  }
+
+  const newProperties = JSON.parse(reqBody);
+
+  const newRequiredProperties = getOnlyRequiredProperties(newProperties);
+  db.updateData(person, newRequiredProperties);
 
   return person;
 }
 
-function updatePerson(id, reqBody) {
-  const newProperties = JSON.parse(reqBody);
+function deletePerson(id) {
+  const person = findPerson(id);
 
-  db.updateData(id, newProperties);
-
-  return db.findById(id)[0];
-}
-
-function deletePerson(person) {
   db.deleteData(person);
-}
-function isValidPerson(reqBody) {
-  const parsedBody = JSON.parse(reqBody);
-
-  const { name, age, hobbies } = parsedBody;
-
-  return (
-    !!name && !!age && !!hobbies
-    // &&
-    // typeof name === 'string' &&
-    // name.length > 0 &&
-    // typeof age === 'number' &&
-    // Array.isArray(hobbies) &&
-    // hobbies.length > 0 &&
-    // hobbies.filter((hobby) => typeof hobby !== 'string' || hobby.length === 0)
-  );
 }
 
 export {

@@ -21,6 +21,16 @@ const responses = {
     statusMessage: 'Not Found',
     headers: { 'Content-Type': 'application/json' },
   },
+  405: {
+    statusCode: 405,
+    statusMessage: 'Method Not Allowed',
+    headers: { 'Content-Type': 'application/json' },
+  },
+  500: {
+    statusCode: 500,
+    statusMessage: 'Internal Server Error',
+    headers: { 'Content-Type': 'application/json' },
+  },
 };
 
 export { responses, API_PATH };
