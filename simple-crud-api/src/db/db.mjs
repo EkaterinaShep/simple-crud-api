@@ -21,4 +21,21 @@ function addData(data) {
   db.push(data);
 }
 
-export { getAll, findById, addData };
+function updateData(id, newProperties) {
+  const data = findById(id)[0];
+
+  Object.entries(newProperties).forEach((property) => {
+    const key = property[0];
+    const value = property[1];
+
+    data[key] = value;
+  });
+}
+
+function deleteData(data) {
+  const index = db.findIndex((item) => item.id === data.id);
+
+  db.splice(index, 1);
+}
+
+export { getAll, findById, addData, updateData, deleteData };

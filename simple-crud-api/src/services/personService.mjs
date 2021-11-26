@@ -17,6 +17,17 @@ function addPerson(reqBody) {
   return person;
 }
 
+function updatePerson(id, reqBody) {
+  const newProperties = JSON.parse(reqBody);
+
+  db.updateData(id, newProperties);
+
+  return db.findById(id)[0];
+}
+
+function deletePerson(person) {
+  db.deleteData(person);
+}
 function isValidPerson(reqBody) {
   const parsedBody = JSON.parse(reqBody);
 
@@ -34,4 +45,11 @@ function isValidPerson(reqBody) {
   );
 }
 
-export { getAll, findPerson, addPerson, isValidPerson };
+export {
+  getAll,
+  findPerson,
+  addPerson,
+  isValidPerson,
+  updatePerson,
+  deletePerson,
+};

@@ -6,6 +6,11 @@ const responses = {
     statusMessage: 'OK',
     headers: { 'Content-Type': 'application/json' },
   },
+  204: {
+    statusCode: 204,
+    statusMessage: 'No Content',
+    headers: { 'Content-Type': 'application/json' },
+  },
   400: {
     statusCode: 400,
     statusMessage: 'Bad Request',
