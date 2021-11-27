@@ -3,12 +3,15 @@
 A tool for creating, reading, updating and deleting person-related data. The tool is based on in-memory database.
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/77797681/143687048-9d38dd33-27d9-47e4-b3ba-0ee07b716f1e.jpg" alt="CRUD API" style="width: 650px"/>
+<img src="https://user-images.githubusercontent.com/77797681/143687048-9d38dd33-27d9-47e4-b3ba-0ee07b716f1e.jpg" alt="CRUD API"/>
 </p>
+
+<br/>
 
 <p align="center">
 <a href="#get-started">Get started</a> | <a href="#usage">Usage</a>
 </p>
+
 
 ## Get started
 
