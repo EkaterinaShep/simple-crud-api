@@ -1,6 +1,6 @@
 import http from 'http';
-import { respondToRequest } from '../../helpers/req-res/index.mjs';
-import { responses } from '../../constants/constants.mjs';
+import { respondToRequest } from '../../../helpers/req-res/index.mjs';
+import { responses } from '../../../constants/constants.mjs';
 
 function createServer({ requestListener }) {
   return http.createServer((req, res) =>

@@ -35,18 +35,21 @@ async function handleRequestWithId(req, res) {
       respondToRequest(res, responses['200'], person);
 
       break;
+
     case 'DELETE':
       PersonService.deletePerson(id);
 
       respondToRequest(res, responses['204']);
 
       break;
+
     default:
       respondToRequest(
         res,
         responses['405'],
         `The '${method}' method is not supported`
       );
+
       return;
   }
 }
@@ -66,7 +69,7 @@ async function handleRequestWithoutId(req, res) {
     case 'POST':
       const person = await PersonService.addPerson(req);
 
-      respondToRequest(res, responses['200'], person);
+      respondToRequest(res, responses['201'], person);
 
       break;
 
@@ -76,6 +79,7 @@ async function handleRequestWithoutId(req, res) {
         responses['405'],
         `The '${method}' method is not supported`
       );
+
       return;
   }
 }

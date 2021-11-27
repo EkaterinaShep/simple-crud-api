@@ -35,6 +35,15 @@ class MissingPropertyError extends CustomError {
   }
 }
 
+// InvalidPropertyError
+class InvalidPropertyError extends CustomError {
+  constructor(message) {
+    super(message);
+    this.message = message;
+    this.statusCode = 400;
+  }
+}
+
 // AbsentIDError
 class AbsentIDError extends CustomError {
   constructor(message) {
@@ -50,4 +59,5 @@ export {
   MissingPropertyError,
   AbsentIDError,
   InvalidIDError,
+  InvalidPropertyError,
 };

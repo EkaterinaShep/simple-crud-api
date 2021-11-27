@@ -1,5 +1,3 @@
-import { Person } from '../models/personModel.mjs';
-
 const db = [];
 
 function getAll() {

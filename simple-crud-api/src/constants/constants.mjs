@@ -6,6 +6,11 @@ const responses = {
     statusMessage: 'OK',
     headers: { 'Content-Type': 'application/json' },
   },
+  201: {
+    statusCode: 201,
+    statusMessage: 'Created',
+    headers: { 'Content-Type': 'application/json' },
+  },
   204: {
     statusCode: 204,
     statusMessage: 'No Content',

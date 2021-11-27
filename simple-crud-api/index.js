@@ -1,11 +1,6 @@
-import {
-  createServer,
-  setServerOption,
-  listenServer,
-} from './src/server/index.js';
-import * as requestListener from './src/handlers/request-listener.mjs';
+import { server } from './src/server/index.mjs';
+import { setServerOption, listenServer } from './src/server/helpers/index.js';
 
-const server = createServer({ requestListener: requestListener.handleRequest });
 const PORT = setServerOption({ envVarName: 'PORT', staticValue: 8080 });
 const HOST = setServerOption({ envVarName: 'HOST', staticValue: '127.0.0.1' });
 
