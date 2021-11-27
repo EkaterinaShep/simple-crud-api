@@ -38,19 +38,19 @@ A tool for creating, reading, updating and deleting person-related data. The too
 
 7. Run a local server in production or development mode:
 
-   - Production mode
+   - Production mode:
 
      ```sh
      npm run start:prod
      ```
 
-   - Development mode
+   - Development mode:
 
      ```sh
      npm run start:dev
      ```
 
-8. Enter URL that you will see in the command shell in the URL field of Postman app, add the API path '/person', click send, get a response.
+8. Enter URL that you will see in the command shell in the URL field of Postman app, add the API path `/person`, click send, get a response.
 
 That's it!
 
@@ -60,19 +60,19 @@ That's it!
 
 The CRUD API supports 4 methods:
 
-- GET '/person' or '/person/${personId}' returns all persons or a person with corresponding 'personId'
-- POST '/person' is used to create a record about a new person and store it in the database
-- PUT '/person/${personId}' is used to update a record about an existing person
-- DELETE '/person/${personId}' is used to delete a record about an existing person from the database
+- GET `/person` or `/person/${personId}` returns all persons or a person with corresponding `personId`
+- POST `/person` is used to create a record about a new person and store it in the database
+- PUT `/person/${personId}` is used to update a record about an existing person
+- DELETE `/person/${personId}` is used to delete a record about an existing person from the database
 
 ### Format of personal data and required properties
 
 Persons are stored as objects that have following properties:
 
-- 'id' — a unique identifier (string, uuid) generated on a server side
-- 'name' — person's name (string, **required**)
-- 'age' — person's age (number, **required**)
-- 'hobbies' — person's hobbies (array of strings or empty array, **required**)
+- `id` — a unique identifier (string, uuid) generated on a server side
+- `name` — person's name (string, **required**)
+- `age` — person's age (number, **required**)
+- `hobbies` — person's hobbies (array of strings or empty array, **required**)
 
 ### How to add and update personal data
 
