@@ -65,6 +65,10 @@ async function updatePerson(id, req) {
     throw new InvalidJSONError('Invalid JSON string');
   }
 
+  if (!hasRequiredProperties(reqBody, ['name', 'age', 'hobbies'])) {
+    throw new MissingPropertyError('The required properties are not defined');
+  }
+
   if (!areValidProperties(reqBody)) {
     throw new InvalidPropertyError('The properties are invalid');
   }
