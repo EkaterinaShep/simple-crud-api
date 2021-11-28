@@ -72,7 +72,7 @@ async function updatePerson(id, req) {
   const newProperties = JSON.parse(reqBody);
 
   const newRequiredProperties = getOnlyRequiredProperties(newProperties);
-  
+
   db.updateData(person, newRequiredProperties);
 
   return person;

@@ -1,11 +1,11 @@
 function hasRequiredProperties(reqBody, properties) {
   const parsedBody = JSON.parse(reqBody);
 
-  properties.forEach((property) => {
-    if (!(property in parsedBody)) {
+  for (let i = 0; i < properties.length; i++) {
+    if (properties[i] in parsedBody) {
       return false;
     }
-  });
+  }
 
   return true;
 }
