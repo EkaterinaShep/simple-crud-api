@@ -1,4 +1,3 @@
-import 'regenerator-runtime/runtime';
 import supertest from 'supertest';
 import { randomUUID } from 'crypto';
 import { server } from '../src/server/index.mjs';
