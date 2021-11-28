@@ -82,6 +82,8 @@ Persons are stored as objects that have following properties:
 - `age` — person's age (number, **required**)
 - `hobbies` — person's hobbies (array of strings or empty array, **required**)
 
+Properties that are not required will not be included in the object even if they are be passed.
+
 ### How to add and update personal data
 To add or update a record you should:
 1. Select the Body tab in Postman.
