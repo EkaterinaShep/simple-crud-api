@@ -74,8 +74,7 @@ The CRUD API supports 4 methods:
 - PUT `/person/${personId}` is used to update a record about an existing person
 - DELETE `/person/${personId}` is used to delete a record about an existing person from the database
 
-### Format of personal data and required properties
-
+### Personal data and personal properties types and required properties
 Persons are stored as objects that have following properties:
 
 - `id` — a unique identifier (string, uuid) generated on a server side
@@ -84,12 +83,30 @@ Persons are stored as objects that have following properties:
 - `hobbies` — person's hobbies (array of strings or empty array, **required**)
 
 ### How to add and update personal data
-
 To add or update a record you should:
-
 1. Select the Body tab in Postman.
+
+![GIF 28 11 2021 10-54-04](https://user-images.githubusercontent.com/77797681/143734403-8dfdaedc-9c33-47b0-a3b2-ab18c636d5b6.gif)
+
 2. Switch to a raw mode.
+
+![GIF 28 11 2021 10-55-08](https://user-images.githubusercontent.com/77797681/143734449-b5cf017c-05d8-4b6d-be9b-ff08a9475f43.gif)
+
+
 3. Choose JSON format.
+
+![GIF 28 11 2021 10-56-04](https://user-images.githubusercontent.com/77797681/143734460-16273bab-a053-403f-86ce-a0c9b6e847f7.gif)
+
+
 4. Enter personal data in JSON format.
+
+![GIF 28 11 2021 10-57-45](https://user-images.githubusercontent.com/77797681/143734528-b0b86915-5d8d-40bf-a786-c19aba296901.gif)
+ 
 5. Select needed method.
-6. Send your record.
+
+![GIF 28 11 2021 11-00-28](https://user-images.githubusercontent.com/77797681/143734623-e6d4c494-dee2-4f27-8d23-bff209fded18.gif)
+
+7. Send your record.
+
+![GIF 28 11 2021 11-01-45](https://user-images.githubusercontent.com/77797681/143734627-31138b31-ac39-4444-8f7c-616315648ad9.gif)
+
