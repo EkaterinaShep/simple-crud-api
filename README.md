@@ -108,5 +108,3 @@ To add or update a record you should:
 
 7. Send your record.
 
-![GIF 28 11 2021 11-01-45](https://user-images.githubusercontent.com/77797681/143734627-31138b31-ac39-4444-8f7c-616315648ad9.gif)
-
